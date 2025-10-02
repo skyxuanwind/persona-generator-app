@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="zh-TW"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;自媒體人設九宮格主題產生器&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- 載入 Tailwind CSS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tailwind.config = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>theme: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>extend: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>fontFamily: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>sans: ['Inter', 'Noto Sans TC', 'sans-serif'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>colors: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'primary-blue': '#10b981', // Emerald green/blue</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'secondary-gray': '#f3f4f6',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', 'Noto Sans TC', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f7f9fb;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grid-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grid-item:focus-within {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.5); /* Primary Blue Ring */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Custom scrollbar for better look */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#result-output::-webkit-scrollbar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#result-output::-webkit-scrollbar-track {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f1f1f1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#result-output::-webkit-scrollbar-thumb {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #cbd5e1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#result-output::-webkit-scrollbar-thumb:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #94a3b8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="p-4 md:p-8"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="max-w-4xl mx-auto bg-white shadow-xl rounded-3xl p-6 md:p-10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="text-center mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>自媒體人設九宮格：內容主題產生器</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-lg text-gray-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>輸入您的 9 大核心人設關鍵字，讓 AI 策略師為您規劃 5 個拍攝主題。</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Loading Indicator and API Key Setup --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="loading-indicator" class="hidden fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50 rounded-3xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-col items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-blue mb-4"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-lg font-medium text-gray-700"&gt;AI 策略師正在發想中，請稍候...&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Nine-Grid Input Area --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-semibold text-gray-700 mb-4 border-l-4 border-primary-blue pl-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>步驟一：填寫您的九宮格人設</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- 關鍵改動：在手機上使用 grid-cols-1，在中等螢幕 (md) 以上才使用 grid-cols-3 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="persona-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Data structure: label, placeholder --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Action Button --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="text-center mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="generate-button"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>class="w-full md:w-auto px-10 py-3 bg-primary-blue text-white font-bold rounded-xl shadow-lg hover:bg-emerald-600 transition duration-200 disabled:opacity-50 flex items-center justify-center"</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>onclick="generateContent()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;svg id="generate-icon" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"&gt;&lt;/path&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;產生 5 個主題內容&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Result Output Area --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-semibold text-gray-700 mb-4 border-l-4 border-primary-blue pl-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>步驟二：AI 策略師建議的主題</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="result-output" class="min-h-[200px] max-h-[600px] overflow-y-auto p-4 bg-secondary-gray border border-gray-200 rounded-xl text-gray-800"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-gray-500 text-center py-10"&gt;點擊上方的按鈕後，內容主題將會顯示在這裡。&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="source-output" class="mt-4 text-sm text-gray-600"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script type="module"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// MARK: - API Key &amp; Constants</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const GEMINI_MODEL = "gemini-2.5-flash-preview-05-20";</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 🚨 密鑰已替換為您提供的最新密鑰。</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// 這是應用程式在外部網路運行的關鍵。</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let apiKey = "AIzaSyBw21-KXVMwXG3UtoGVVBoqODhlDXo5oSg";<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const MAX_RETRIES = 5;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// The 9 fields for the persona grid (房仲/個人人設簡化版)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const personaFields = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'identity', label: '1. 我是誰/角色定位 (Center)', placeholder: '例如：台北信義區房仲、裝修專家' },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'expertise', label: '2. 專長/主要領域 (Skill)', placeholder: '例如：老屋翻新、套房買賣' },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'audience', label: '3. 想幫助誰/客群 (Audience)', placeholder: '例如：首次購屋的年輕情侶' },</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'pain-point', label: '4. 他們煩惱什麼 (Pain Point)', placeholder: '例如：預算有限，又想找地點好的房子' },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'solution', label: '5. 我的核心價值 (Value)', placeholder: '例如：誠信正直、提供市場深度分析' },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'interest', label: '6. 我的業餘興趣 (Interest)', placeholder: '例如：健身、寵物、咖啡' },</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'trait', label: '7. 我的說話風格 (Style)', placeholder: '例如：幽默風趣、親切有耐心' },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'slogan', label: '8. 我的金句/口頭禪 (Slogan)', placeholder: '例如：買房，就是買未來！' },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ id: 'difference', label: '9. 我與眾不同之處 (Difference)', placeholder: '例如：有 10 年資產配置經驗的房仲' },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// MARK: - DOM Elements</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const personaGrid = document.getElementById('persona-grid');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const generateButton = document.getElementById('generate-button');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const resultOutput = document.getElementById('result-output');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const sourceOutput = document.getElementById('source-output');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const loadingIndicator = document.getElementById('loading-indicator');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// MARK: - Initial Grid Rendering</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderGrid() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>personaGrid.innerHTML = personaFields.map(field =&gt; `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid-item bg-white p-3 rounded-xl border border-gray-300 shadow-sm hover:border-primary-blue/50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="${field.id}" class="block text-sm font-medium text-gray-700 mb-1"&gt;${field.label}&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" id="${field.id}" placeholder="${field.placeholder}"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                           </span>class="mt-1 block w-full border-0 p-0 text-base text-gray-900 focus:ring-0 focus:outline-none placeholder-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`).join('');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = renderGrid;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// MARK: - Theme Parsing Function</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Parses the Markdown list output into an array of structured theme objects.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function parseThemes(markdownText) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const themes = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Clean up text and split by numbered list item markers</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const themeBlocks = markdownText.split(/(\n\s*\d+\.\s*)/g).filter(block =&gt; block.trim() !== '' &amp;&amp; !/^\d+\.$/.test(block.trim()));</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>themeBlocks.forEach((block, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>block = block.trim();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Regex to capture: **Title**: Description (or Title: Description)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const match = block.match(/^\s*\*\*(.*?)\*\*[:：]?\s*(.*)/s);</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let title = `主題 ${index + 1} 標題 (無法解析)`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let core = '無法解析內容核心。';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (match) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Successful capture</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>title = match[1].trim() || `主題 ${index + 1} 標題`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>core = match[2].trim() || '無內容核心說明。';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>// Fallback for non-bolded or slightly different format</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>const parts = block.split(/[:：]/, 2);</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>if (parts.length === 2) {</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>title = parts[0].replace(/\*\*/g, '').trim();<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                         </span>core = parts[1].trim();</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>// Last resort: take the first line as title</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>title = block.split('\n')[0].replace(/\*\*/g, '').trim();</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>core = block.substring(title.length).trim();</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>if (core.startsWith(':') || core.startsWith('：')) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>core = core.substring(1).trim();</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>themes.push({ title, core });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return themes;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// MARK: - AI Content Generation Logic</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Utility function to handle API retries with exponential backoff.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function retryWithExponentialBackoff(fetcher, maxRetries) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; maxRetries; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const response = await fetcher();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (response.ok) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>return response;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// 遇到 401 錯誤時，顯示更清晰的提示並停止重試</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (response.status === 401) {</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>resultOutput.innerHTML = `&lt;p class="text-red-500 text-center py-10"&gt;🚨 API 驗證錯誤 (401)。&lt;br&gt;請確認程式碼中的 **apiKey** 是否為有效的 Gemini 密鑰。&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>throw new Error(`API call failed with status 401: API Key configuration error.`);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Handle specific error codes if needed, e.g., 429 Rate Limit</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (response.status === 429 || response.status &gt;= 500) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>console.warn(`API call failed (Status: ${response.status}). Retrying in ${delay}ms... (Attempt ${i + 1}/${maxRetries})`);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>await new Promise(resolve =&gt; setTimeout(resolve, delay));</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>continue;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// For other non-retryable errors (e.g., 400), throw immediately</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>throw new Error(`API call failed with status ${response.status}: ${response.statusText}`);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (i === maxRetries - 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>console.error("API call failed after all retries.", error);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>throw error;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// For network errors, we retry</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.warn(`Network error. Retrying in ${delay}ms... (Attempt ${i + 1}/${maxRetries})`);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>await new Promise(resolve =&gt; setTimeout(resolve, delay));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Main function to generate content using the Gemini API.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.generateContent = async function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>generateButton.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resultOutput.innerHTML = `&lt;p class="text-gray-500 text-center py-10"&gt;AI 策略師正在發想中...&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>sourceOutput.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const inputs = personaFields.map(field =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const element = document.getElementById(field.id);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return `${field.label.split(' ')[0]}: ${element ? element.value.trim() : '無輸入'}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}).join('\n');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!inputs.trim()) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>resultOutput.innerHTML = `&lt;p class="text-red-500 text-center py-10"&gt;請至少填寫一個九宮格項目！&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>generateButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadingIndicator.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 確保模型輸出格式為易於解析的列表</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const systemPrompt = "你是一位頂尖的自媒體內容策略師。請根據提供的九宮格人設資訊，發想5個具體、引人入勝且與時俱進的影片或文章主題。請使用嚴格的格式輸出：每個主題必須是獨立的編號列表項 (1. 2. 3...)，且格式為：**[吸引人的標題]**：[簡短的內容核心說明]。請勿添加任何其他前言、後記或額外解釋。";</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const userQuery = `我的自媒體九宮格人設設定如下：\n\n${inputs}\n\n請為我產生5個拍攝主題內容。`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const payload = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>contents: [{ parts: [{ text: userQuery }] }],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// 啟用 Google Search Grounding，確保主題與時俱進</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tools: [{ "google_search": {} }],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>systemInstruction: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>parts: [{ text: systemPrompt }]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const fetcher = () =&gt; fetch(API_URL, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>headers: { 'Content-Type': 'application/json' },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: JSON.stringify(payload)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await retryWithExponentialBackoff(fetcher, MAX_RETRIES);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const result = await response.json();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const candidate = result.candidates?.[0];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (candidate &amp;&amp; candidate.content?.parts?.[0]?.text) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const text = candidate.content.parts[0].text;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const themes = parseThemes(text);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let themesHtml = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (themes.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// 1. Display generated text in clean card format</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>themesHtml = themes.map((theme, index) =&gt; `</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="bg-white p-5 rounded-xl shadow-lg border-l-4 border-primary-blue/70 mb-4 transition duration-300 hover:shadow-xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex items-start mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-xl font-extrabold text-primary-blue bg-primary-blue/10 rounded-full h-8 w-8 flex items-center justify-center mr-3 flex-shrink-0"&gt;${index + 1}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h3 class="text-lg font-bold text-gray-800 pt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>主題標題: &lt;span class="text-primary-blue"&gt;${theme.title}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-gray-600 pl-11"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="font-semibold text-gray-700"&gt;內容核心:&lt;/span&gt; ${theme.core}</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>`).join('');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>resultOutput.innerHTML = themesHtml;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>// Fallback for non-parsed or strange output</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>resultOutput.innerHTML = `&lt;p class="text-red-500 text-center py-5"&gt;無法以簡潔格式解析 AI 產出的主題。以下是原始輸出內容：&lt;/p&gt;&lt;div class="p-4 border border-gray-300 rounded-lg whitespace-pre-wrap text-sm text-gray-700"&gt;${text}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// 2. Extract and display grounding sources (citations)</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let sources = [];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const groundingMetadata = candidate.groundingMetadata;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (groundingMetadata &amp;&amp; groundingMetadata.groundingAttributions) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>sources = groundingMetadata.groundingAttributions</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>.map(attribution =&gt; ({</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>uri: attribution.web?.uri,</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>title: attribution.web?.title,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}))</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>.filter(source =&gt; source.uri &amp;&amp; source.title);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (sources.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const sourceList = sources.map((s, index) =&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>`&lt;a href="${s.uri}" target="_blank" class="text-primary-blue hover:underline block truncate"&gt;${index + 1}. ${s.title}&lt;/a&gt;`</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>).join('');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>sourceOutput.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="font-medium"&gt;參考來源 (AI 確保內容與時俱進):&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="mt-1 space-y-1"&gt;${sourceList}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>sourceOutput.innerHTML = `&lt;p class="text-gray-500"&gt;此內容為純AI生成，無即時網路資訊參考。&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resultOutput.innerHTML = `&lt;p class="text-red-500 text-center py-10"&gt;抱歉，AI 內容策略師未能產生主題。請檢查您的輸入並再試一次。&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.error("Gemini response was missing text content.", result);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error("Content generation failed:", error);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// 檢查是否是 401 錯誤，如果是則不覆蓋錯誤訊息，以顯示自訂提示</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (error.message.includes("401")) return;<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>resultOutput.innerHTML = `&lt;p class="text-red-500 text-center py-10"&gt;連線錯誤：無法與 AI 伺服器建立連線，請稍後再試。 (${error.message})&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} finally {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>generateButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadingIndicator.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
